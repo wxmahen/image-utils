@@ -14,10 +14,10 @@ import javax.swing.JProgressBar;
  * @author Mahen Samaranayake
  */
 public class Cartoonifier {
-    
+
     String input_folder = "input";
     String output_folder = "output";
-    
+
     public void cartoonifyAll(JProgressBar progressBar, JButton button) {
         new Thread(new Runnable() {
             @Override
@@ -37,9 +37,10 @@ public class Cartoonifier {
             }
         }).start();
     }
-    
+
     public void cartoonify(String url) {
         try {
+            int var = 15;
             BufferedImage bi = ImageIO.read(new File(input_folder + "\\" + url));
             int x = bi.getWidth();
             int y = bi.getHeight();
@@ -70,9 +71,8 @@ public class Cartoonifier {
                     int green = col.getGreen();
                     int blue = col.getBlue();
                     Color color = Color.white;
-                    int var = 30;
                     if (red < lines_r.get(i) - var || green < lines_g.get(i) - var || blue < lines_b.get(i) - var) {
-                        color = Color.BLACK;
+                        color = col;
                     }
                     try {
                         bi.setRGB(i, j, color.getRGB());
